@@ -1,9 +1,6 @@
 <template>
 <div id="container">
-  <div id="header">
-    <h1>COGNOTE</h1>
-    <h3 id="subtitle">AN EASIER WAY TO STUDY</h3>
-  </div>
+  <cognoteHeader></cognoteHeader>
 
 <p>Type your notes below, and hit "Submit" to make a quiz!!</p>
 
@@ -12,7 +9,7 @@
   <textarea id="notes" type="text" >
 
   </textarea><br>
-    <button @submit="splitData()">Submit</button>
+    <button @click="splitData()">Submit</button>
 
 
 
@@ -20,7 +17,18 @@
     </div>
 </template>
 
+<style>
+button {
+        background: #4D7498;
+        border: #48466D solid 3px;
+        color: white;
+        padding: 10px 30px 10px 30px ;
+    }
+</style>
+
 <style scoped>
+    
+
 
 #container {
   font-family: sans-serif;
@@ -45,36 +53,11 @@
   height: 20vh;
   width: 80vw;
 }
-
-
-#header {
-  width: 100%;
-  margin-top: 0px;
-  padding: 0px;
-  height: 140px;
-  background: #48466D;
-  color: white;
-  position: relative;
-}
-h1 {
-  position: absolute;
-  bottom: 20px;
-  left: 3px;
-  font-size: 50px;
-  font-style: italic;
-  margin: 0px;
-}
-
-#subtitle {
-  position: absolute;
-  bottom: -5px;
-  font-style: italic;
-  left: 10px;
-  font-size: 12px;
-}
 </style>
 
 <script>
+    
+import cognoteHeader from './CognoteHeader.vue'
 
 export default {
   name: 'hello',
@@ -84,18 +67,23 @@ export default {
     }
 
   },
+    
+  components: {
+      cognoteHeader
+  },
+  
   methods: {
- +    splitData: function() {
- +      console.log("hello world");
- +      var s = document.getElementById('notes').value;
- +      console.log(s);
- +    var fields = s.split('\n');
- +    var perosn1 = fields[0];
- +    console.log(person1);
- +    var perosn2 = fields[1];
- +    console.log(person2);
- +    }
- +  }
+    splitData: function() {
+        console.log("hello world");
+        var s = document.getElementById('notes').value;
+        console.log(s);
+        var fields = s.split('\n');
+        var perosn1 = fields[0];
+        console.log(person1);
+        var perosn2 = fields[1];
+        console.log(person2);
+     }
+   }
 
 
 }

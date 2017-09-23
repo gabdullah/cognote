@@ -1,24 +1,23 @@
 <template>
 <div id="container">
-  <div id="header">
-    <h1>COGNOTE</h1>
-    <h3 id="subtitle">AN EASIER WAY TO STUDY</h3>
-  </div>
+  <cognoteHeader></cognoteHeader>
 
 <p>Quiz Time!</p>
   <div id="flashContainer">
     <div class="flashcard front" 
          v-bind:class="{ flipUp: showFront,
-                         flipDown: !showFront}">
+                         flipDown: !showFront
+                       }">
         
-    Front
+    <p class="cardText">Front</p>
     </div>
     
     <div class="flashcard back" 
          v-bind:class="{ flipUp: !showFront,
-                         flipDown: showFront}">
+                         flipDown: showFront,
+                       hidden: !loaded}">
         
-    Back
+    <p class="cardText">Back</p>
     </div>
   </div>
     <button @click="flipCard()">Flip</button>
@@ -30,6 +29,20 @@
 </template>
 
 <style scoped>
+    
+    button {
+        background: #4D7498;
+        border: #48466D solid 3px;
+        color: white;
+        padding: 10px 30px 10px 30px ;
+        margin: 20px;
+        outline: none;
+    }
+    
+    button:hover {
+        background: #3D84A8;
+        border: #4D7498 solid 3px;
+    }
     
 #container {
   font-family: sans-serif;
@@ -58,16 +71,24 @@
     .flashcard {
         width: 60vw;
         height: 30vw;
-        
         color: white;
         position: absolute;
+        display: flex;
+        align-items: center;
+        text-align: center;
+        justify-content: center;
     }
     
     .front {
         background: #3D84A8;
+        z-index: 1000;
     }
     .back {
         background: #4D7498
+    }
+    
+    .hidden {
+        opacity: 0;
     }
     
     #flashContainer {
@@ -79,12 +100,16 @@
 
     .flipUp {
         transform-style: preserve-3d;
-        animation: flipUp 1s linear;
+        animation: flipUp .6s linear;
     }
     .flipDown {
         transform-style: preserve-3d;
-        animation: flipDown .5s linear;
+        animation: flipDown .3s linear;
         transform: rotateX(-90deg);
+    }
+    
+    .cardText {
+        padding: 20px;
     }
     
     @keyframes flipUp {
@@ -134,6 +159,9 @@ h1 {
 
 
 <script>
+import cognoteHeader from './CognoteHeader.vue'
+
+    
 export default {
   name: 'quiz',
   data () {
@@ -141,7 +169,19 @@ export default {
       questions: {},
       showFront: true,
       showBack: false,
+      loaded: false
     }
+  },
+    
+  components:{
+      cognoteHeader
+  },
+    
+  mounted: function() {
+      var vm = this;
+      setTimeout(function(){ 
+          vm.loaded = true;
+      }, 2000);
   },
     
   methods: {
