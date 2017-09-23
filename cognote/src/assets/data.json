@@ -1,0 +1,17 @@
+[
+    {
+        "type": "term",
+        "term": "Mitochondria",
+        "definition": "Powerhouse of the Cell"
+    },
+    {
+        "type": "whenQuestion",
+        "question": "the Renassaince",
+        "time": "1300s"
+    },
+    {
+        "type": "whatQuestion",
+        "question": "the best hackathon",
+        "answer": "Kent Hack Enough"
+    }
+]

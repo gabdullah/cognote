@@ -12,7 +12,7 @@
   <textarea id="notes" type="text" >
 
   </textarea><br>
-    <button @click="splitData()">Submit</button>
+    <button>Submit</button>
 
 
 
@@ -36,14 +36,14 @@
 }
 #name {
   background-color: #F5FEFF;
-  width:80vh;
+  width:80vw;
   height:25px;
   outline: none;
   border: none;
 }
 #notes {
   height: 20vh;
-  width: 80%;
+  width: 80vw;
 }
 
 
@@ -83,17 +83,6 @@ export default {
       msg: 'Welcome to Your Vue.js App'
     }
   },
-  methods: {
-    splitData: function() {
-      console.log("hello world");
-      var s = document.getElementById('notes').value;
-      console.log(s);
-    var fields = s.split('\n');
-    var perosn1 = fields[0];
-    console.log(person1);
-    var perosn2 = fields[1];
-    console.log(person2);
-    }
-  }
+
 }
 </script>
