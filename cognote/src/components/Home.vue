@@ -36,14 +36,14 @@
 }
 #name {
   background-color: #F5FEFF;
-  width:80vh;
+  width:80vw;
   height:25px;
   outline: none;
   border: none;
 }
 #notes {
   height: 20vh;
-  width: 80%;
+  width: 80vw;
 }
 
 
@@ -73,3 +73,6 @@ h1 {
   font-size: 12px;
 }
 </style>
+
+
+<script></script>
