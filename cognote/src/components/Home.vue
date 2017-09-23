@@ -12,7 +12,7 @@
   <textarea id="notes" type="text" >
 
   </textarea><br>
-    <button>Submit</button>
+    <button @submit="splitData()">Submit</button>
 
 
 
@@ -82,7 +82,21 @@ export default {
     return {
       msg: 'Welcome to Your Vue.js App'
     }
+
   },
+  methods: {
+ +    splitData: function() {
+ +      console.log("hello world");
+ +      var s = document.getElementById('notes').value;
+ +      console.log(s);
+ +    var fields = s.split('\n');
+ +    var perosn1 = fields[0];
+ +    console.log(person1);
+ +    var perosn2 = fields[1];
+ +    console.log(person2);
+ +    }
+ +  }
+
 
 }
 </script>
