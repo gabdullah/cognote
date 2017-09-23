@@ -18,12 +18,7 @@
 </template>
 
 <style>
-button {
-        background: #4D7498;
-        border: #48466D solid 3px;
-        color: white;
-        padding: 10px 30px 10px 30px ;
-    }
+
 </style>
 
 <style scoped>
@@ -72,18 +67,17 @@ export default {
       cognoteHeader
   },
   
-methods: {
-     splitData: function() {
-       console.log("hello world");
-       var s = document.getElementById('notes').value;
-       console.log(s);
-     var fields = s.split('\n');
-     var counter = 0;
-     var holder;
-     while (counter < fields.length){
-      console.log(fields[counter]);
-      counter++;
-   }
+  methods: {
+    splitData: function() {
+        console.log("hello world");
+        var s = document.getElementById('notes').value;
+        console.log(s);
+        var fields = s.split('\n');
+        var perosn1 = fields[0];
+        console.log(person1);
+        var perosn2 = fields[1];
+        console.log(person2);
      }
    }
+}
 </script>
