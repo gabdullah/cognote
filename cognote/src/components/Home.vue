@@ -6,22 +6,22 @@
   </div>
 
 <p>Type your notes below, and hit "Submit" to make a quiz!!</p>
-  <form action="" method="post">
+
 <input id="name" type="text" placeholder="Enter your name"><br><br>
-  
-  <textarea id="notes" type="text">
-    
+
+  <textarea id="notes" type="text" >
+
   </textarea><br>
-    <button>Submit</button>
-  </form>
-    
-    
-    
+    <button @click="splitData()">Submit</button>
+
+
+
+
     </div>
 </template>
 
 <style scoped>
-    
+
 #container {
   font-family: sans-serif;
   position: absolute;
@@ -73,3 +73,27 @@ h1 {
   font-size: 12px;
 }
 </style>
+
+<script>
+
+export default {
+  name: 'hello',
+  data () {
+    return {
+      msg: 'Welcome to Your Vue.js App'
+    }
+  },
+  methods: {
+    splitData: function() {
+      console.log("hello world");
+      var s = document.getElementById('notes').value;
+      console.log(s);
+    var fields = s.split('\n');
+    var perosn1 = fields[0];
+    console.log(person1);
+    var perosn2 = fields[1];
+    console.log(person2);
+    }
+  }
+}
+</script>
