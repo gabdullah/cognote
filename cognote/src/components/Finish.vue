@@ -1,38 +1,13 @@
 <template>
 <div id="container">
   <cognoteHeader></cognoteHeader>
+    <link href="https://afeld.github.io/emoji-css/emoji.css" rel="stylesheet">
 
-<p>Quiz Time!</p>
-    <p>You're on question {{ questionIndex }} of 
-        {{ $root.questions.length }}</p>
-  <div id="flashContainer">
-    <div class="flashcard front" 
-         v-bind:class="{ flipUp: showFront,
-                         flipDown: !showFront
-                       }">
-        
-    <p class="cardText">
-        {{ $root.questions[questionIndex - 1].word }}
-        </p>
-    </div>
+    <p>Results:</p>
+    <p v-for="(question, index) in $root.questions">
+    Question {{index + 1}} : {{ question.status }}
     
-    <div class="flashcard back" 
-         v-bind:class="{ flipUp: !showFront,
-                         flipDown: showFront,
-                       hidden: !loaded}">
-        
-    <p class="cardText">
-        {{$root.questions[questionIndex - 1].answer}}</p>
-    </div>
-  </div>
-    <button @click="flipCard()">Flip</button>
-    
-    <div id="finish" v-if="flipped">
-        <button @click="next(false)">I got it right! :)</button>
-        <button @click="next(true)">I got it wrong :(</button>
-    </div>
-  
-    
+    </p>
     
     
     </div>
@@ -52,12 +27,6 @@
     button:hover {
         background: #3D84A8;
         border: #4D7498 solid 3px;
-    }
-    
-    #finish {
-        display: flex;
-        align-self: center;
-        justify-content: center;
     }
     
 #container {
@@ -182,10 +151,10 @@ export default {
   name: 'quiz',
   data () {
     return {
-      questionIndex: 1,
+      questions: {},
       showFront: true,
-      loaded: false,
-      flipped: false
+      showBack: false,
+      loaded: false
     }
   },
     
@@ -197,36 +166,12 @@ export default {
       var vm = this;
       setTimeout(function(){ 
           vm.loaded = true;
-      }, 600);
+      }, 2000);
   },
     
   methods: {
       flipCard: function() {
           this.showFront = !this.showFront;
-          this.flipped = true;
-      },
-      next: function(failed) {
-          this.flipped = false;
-          this.loaded = false;
-          this.showFront = true;
-          
-          if (failed) {
-              this.$root.questions[this.questionIndex - 1].status = 'Incorrect';
-          } else {
-              this.$root.questions[this.questionIndex - 1].status = 'Correct';
-          }
-          
-          if (this.questionIndex < this.$root.questions.length) {
-          
-            this.questionIndex++;
-            var vm = this;
-            setTimeout(function(){ 
-                vm.loaded = true;
-            }, 600);
-          }
-          else {
-              this.$router.push('/finish');
-          }
       }
   }
 }
