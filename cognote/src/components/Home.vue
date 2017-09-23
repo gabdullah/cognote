@@ -27,7 +27,7 @@ button {
 </style>
 
 <style scoped>
-    
+
 
 
 #container {
@@ -56,7 +56,7 @@ button {
 </style>
 
 <script>
-    
+
 import cognoteHeader from './CognoteHeader.vue'
 
 export default {
@@ -67,23 +67,37 @@ export default {
     }
 
   },
-    
+
   components: {
       cognoteHeader
   },
-  
+
 methods: {
+     // function is invoked when a list is parsed (signified by '-' and 'TAB')
+     splitList: function(field, index){
+       console.log("splitList invoked")
+       //appending field to previous answer
+       this.root.questions[index].answer.push("\n" + field);
+     }
+
      splitData: function() {
        console.log("hello world");
        var s = document.getElementById('notes').value;
        console.log(s);
-     var fields = s.split('\n');
-     var counter = 0;
-     var holder;
-     while (counter < fields.length){
-      console.log(fields[counter]);
-      counter++;
-   }
+       var fields = s.split('\n');
+       var counter = 0;
+       var holder;
+       //
+       while (counter < fields.length){
+         console.log(fields[counter]);
+         //checks to see if field element is a list
+         if(fields[counter][0] == '-' || fields[counter][0] == '\t'){
+           splitList(fields[counter], counter);
+         }
+         counter++;
+       }
      }
    }
+ }
+   //this.root.questions[index]
 </script>
