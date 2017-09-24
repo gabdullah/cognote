@@ -101,12 +101,14 @@ methods: {
        var temp3 = this.$root.questions[pos].detail.pop();
        console.log(temp1 + '|' + temp2 + '|' + temp3);*/
      },
+
      parseDate: function(field, pos, dateStart){
        var date = field.substring(dateStart, dateStart + 4);
        this.$root.questions[pos].type = "Date";
        this.$root.questions[pos].word = date;
        this.$root.questions[pos].detail.push(field);
-     }
+     },
+
      splitData: function() {
        console.log("splitData");
        // Read in text from main text input
@@ -123,8 +125,7 @@ methods: {
          if(fields[counter][0] == '-' || fields[counter][0] == '\t'){
            // Add field element to previous concept
            this.parseList(fields[counter], containerPos-1);
-         }
-         else {
+         } else {
             // Note information is for a new key concept
             // ++containerPos;
 
