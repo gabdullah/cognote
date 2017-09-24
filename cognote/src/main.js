@@ -12,7 +12,7 @@ new Vue({
   el: '#app',
   data () {
       return {
-          questions: getQuestions(index)
+          questions: getQuestions()
       }
   },
   router,

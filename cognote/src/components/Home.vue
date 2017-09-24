@@ -82,7 +82,7 @@ methods: {
        // Append field information to previous concept
        this.$root.questions[pos].detail.push(temp);
        // TEST OUTPUT
-       var test = this.$root.questions[pos].detail.pop();
+       var test = this.$root.questions[pos].detail;
        console.log("parseList push: " + test);
      },
 
