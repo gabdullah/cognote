@@ -83,6 +83,7 @@ methods: {
        //var test = this.$root.questions[pos].detail;
        //console.log(this.$root.questions[pos].detail.length);
      },
+
      parseConcept: function(field, pos, noteType, splitter) {
        // Invoked to parse out concept information
        console.log("parseConcept invoked");
@@ -139,7 +140,7 @@ methods: {
             }
             else {
               console.log("heading");
-              this.parseConcept(fields[counter], containerPos, "list", "" );
+              this.parseConcept(fields[counter], containerPos, "header", "" );
             }
             ++containerPos;
             this.$root.questions[0].max = containerPos;
