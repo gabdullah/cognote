@@ -43,6 +43,11 @@ h1 {
   left: 10px;
   font-size: 12px;
   padding-bottom: 25px;
+    transition-duration: 3s;
 }
+    #subtitle:hover {
+        letter-spacing: 20px;
+    }
+    
 
 </style>
