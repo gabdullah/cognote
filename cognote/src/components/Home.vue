@@ -75,9 +75,12 @@ export default {
 methods: {
      // Invoked when a list is parsed (signified by '-' and 'TAB')
      splitList: function(field, index){
-       console.log("splitList invoked")
+       console.log("splitList invoked");
        // Append field information to previous concept
-       this.root.questions[index].answer.push("\n" + field);
+       var temp = field.substring(1);
+       this.$root.questions[index].detail.push(temp.trim());
+       var test = this.$root.questions[index].detail.pop();
+       console.log(test);
      },
 
      splitData: function() {
@@ -95,7 +98,7 @@ methods: {
          // Checks to see if field element is a list
          if(fields[counter][0] == '-' || fields[counter][0] == '\t'){
            // Add field element to previous concept
-           splitList(fields[counter], containerPos);
+           this.splitList(fields[counter], containerPos);
          } else {
            // Note information is for a new key concept
            ++containerPos;
