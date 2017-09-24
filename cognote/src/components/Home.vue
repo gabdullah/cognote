@@ -6,10 +6,12 @@
 
 <!--<input id="name" type="text" placeholder="Enter your name"><br><br>-->
 
-  <textarea id="notes" type="text" >
+  <textarea id="notes" type="text" v-model="notes">
 
   </textarea><br>
     <button @click="splitData()">Submit</button>
+    <br><br>
+    <button @click="sampleNotes()">Click here to populate w sample notes</button>
 
 
 
@@ -58,7 +60,7 @@ export default {
   name: 'hello',
   data () {
     return {
-      msg: 'Welcome to Your Vue.js App'
+      notes: ''
     }
   },
   components: {
@@ -133,9 +135,12 @@ export default {
       },
 
       splitData: function() {
+        this.$root.questions = [];
+          
         console.log("splitData");
         // Read in text from main text input
-        var s = document.getElementById('notes').value;
+        
+        var s = this.notes;
         console.log(s);
         var fields = s.split('\n');  // Notes broken by line
         var counter = 0;             // Index for fields
@@ -184,6 +189,10 @@ export default {
           counter++;
         }
       this.$router.push('/quiz');
+    },
+      
+    sampleNotes: function() {
+        this.notes = "concept1: immediate detail\nconcept2: immediate detail\n- subsequent detail 1\n- subsequent detail 2\nconcept3:\n- subsequent detail 1\n- subsequent detail 2\nconcept4\nconcept5 -> definition\nconcept6\n- subsequent detail 1\nThe war of 1812 is donk\nconcept7\n\tsubsequent detail 1\n\tsubsequent detail 2\nconcept8 - immediate detail\n- subsequent date 2002\n- subsequent detail 1";
     }
   }
 }

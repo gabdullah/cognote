@@ -4,7 +4,7 @@
   <cognoteHeader></cognoteHeader>
     <link href="https://afeld.github.io/emoji-css/emoji.css" rel="stylesheet">
 
-    <p>Results: {{ $root.correct }} / {{ $root.questions[0].max }}</p>
+    <p>Results: {{ $root.correct }} / {{ $root.questions.length }}</p>
     <p v-for="index in $root.questions[0].max">
     Question {{index}} : {{ $root.questions[index - 1].status }}
     
