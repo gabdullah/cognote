@@ -30,7 +30,8 @@ new Vue({
                   answer: "prepares protiens",
                   status: "none" // None, correct, incorrect
               }
-          ]
+          ],
+          correct: 0
       }
   },
   router,

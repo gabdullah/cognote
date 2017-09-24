@@ -100,7 +100,8 @@
         z-index: 1000;
     }
     .back {
-        background: #4D7498
+        background: #ABEDD8;
+        color: #4D7498;
     }
     
     .hidden {
@@ -210,10 +211,16 @@ export default {
           this.loaded = false;
           this.showFront = true;
           
+          var questionPoint = this.$root.questions[this.questionIndex - 1]
+          
           if (failed) {
-              this.$root.questions[this.questionIndex - 1].status = 'Incorrect';
+              questionPoint.status = 'Incorrect';
           } else {
-              this.$root.questions[this.questionIndex - 1].status = 'Correct';
+              if (questionPoint.status == 'incorrect' || questionPoint.status == 'none') {
+                  this.$root.correct++;
+              }
+              questionPoint.status = 'Correct';
+              
           }
           
           if (this.questionIndex < this.$root.questions.length) {
