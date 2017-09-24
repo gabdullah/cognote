@@ -80,10 +80,13 @@ methods: {
        var temp = field.substring(1);
        temp.trim();
        // Append field information to previous concept
+       this.$root.questions[pos].type = "list";
+       this.$root.questions[pos].word = this.$root.questions[pos - 1];
+       console.log(this.$root.questions[pos].detail.length + "LENGTH");
        this.$root.questions[pos].detail.push(temp);
        // TEST OUTPUT
        //var test = this.$root.questions[pos].detail;
-       //console.log("parseList push: " + test);
+       //console.log(this.$root.questions[pos].detail.length);
      },
 
      parseConcept: function(field, pos, type, splitter) {
@@ -114,16 +117,19 @@ methods: {
          // Checks to see if field element is a list
          if(fields[counter][0] == '-' || fields[counter][0] == '\t'){
            // Add field element to previous concept
-           this.parseList(fields[counter], containerPos);
+           this.parseList(fields, counter, containerPos);
          }
          else if(fields[counter].match(" - ")){ 
           this.parseConcept(fields[counter], containerPos, "simple", '-');
+          ++containerPos;
          }
          else if(fields[counter].match(':')){
           this.parseConcept(fields[counter], containerPos, "simple", ':');
+          ++containerPos;
          }
          else if(fields[counter].match("->")){
           this.parseConcept(fields[counter], containerPos, "simple", "->");
+          ++containerPos;
          }
           else {
            // Note information is for a new key concept
