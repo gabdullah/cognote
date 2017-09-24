@@ -86,16 +86,20 @@ methods: {
 
      parseConcept: function(field, pos, noteType, splitter) {
        // Invoked to parse out concept information
-       console.log("parseConcept invoked");
+       console.log("parseConcept invoked; splitter: " + splitter);
        this.$root.questions[pos].type = noteType;
        if ( splitter == "" ) {
          console.log("NOT ARRAY");
          this.$root.questions[pos].word = field
        } else {
-       this.$root.questions[pos].word = field.split(splitter)[0];
-       this.$root.questions[pos].detail.push(field.split(splitter)[1]);
+        var fieldHalves = field.split(splitter);
+        this.$root.questions[pos].word = fieldHalves[0];
+        this.$root.questions[pos].detail.push(fieldHalves[1]);
        }
-       console.log(this.$root.questions[pos].word);
+       console.log("parceConcept word: " + this.$root.questions[pos].word);
+       if ( splitter != "" ) {
+         console.log( "parseConcept detail: " + this.$root.questions[pos].detail );
+       }
        /*var temp1 = this.$root.questions[pos].type;
        var temp2 = this.$root.questions[pos].word;
        var temp3 = this.$root.questions[pos].detail.pop();

@@ -6,7 +6,13 @@ concept3:
 - subsequent detail 1
 - subsequent detail 2
 concept4
-concept5
+concept5 -> definition
 concept6
 - subsequent detail 1
 The war of 1812 is donk
+concept7
+	subsequent detail 1
+	subsequent detail 2
+concept8 - immediate detail
+- subsequent date 2002
+- subsequent detail 1
