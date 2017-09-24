@@ -73,31 +73,38 @@ export default {
   },
 
 methods: {
-     // function is invoked when a list is parsed (signified by '-' and 'TAB')
+     // Invoked when a list is parsed (signified by '-' and 'TAB')
      splitList: function(field, index){
        console.log("splitList invoked")
-       //appending field to previous answer
+       // Append field information to previous concept
        this.root.questions[index].answer.push("\n" + field);
-     }
+     },
 
      splitData: function() {
        console.log("hello world");
        var s = document.getElementById('notes').value;
        console.log(s);
-       var fields = s.split('\n');
-       var counter = 0;
+       var fields = s.split('\n');  // Notes broken by line
+       var counter = 0;             // Index for fields
        var holder;
-       //
+       var containerPos = 0;        // Position in question array
+
+       // Step through source text statements
        while (counter < fields.length){
          console.log(fields[counter]);
-         //checks to see if field element is a list
+         // Checks to see if field element is a list
          if(fields[counter][0] == '-' || fields[counter][0] == '\t'){
-           splitList(fields[counter], counter);
+           // Add field element to previous concept
+           splitList(fields[counter], containerPos);
+         } else {
+           // Note information is for a new key concept
+           ++containerPos;
          }
+
+        // this.root.questions[index]
          counter++;
        }
      }
    }
  }
-   //this.root.questions[index]
 </script>

@@ -15,17 +15,17 @@ new Vue({
               {
                   type: "definition",
                   word: "Mitochondria",
-                  answer: "Powerhouse of the Cell"
+                  detail: "Powerhouse of the Cell"
               },
               {
                   type: "definition",
                   word: "nucleus",
-                  answer: "contains some dna i think"
+                  detail: "contains some dna i think"
               },
               {
                   type: "definition",
                   word: "golgi apparatus",
-                  answer: "prepares protiens"
+                  detail: "prepares protiens"
               }
           ]
       }
