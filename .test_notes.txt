@@ -1,0 +1,8 @@
+concept1: immediate detail
+concept2: immediate detail
+- subsequent detail 1
+- subsequent detail 2
+concept3:
+- subsequent detail 1
+- subsequent detail 2
+
