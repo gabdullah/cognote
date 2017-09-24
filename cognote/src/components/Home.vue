@@ -76,9 +76,9 @@ export default {
         // Append field information to previous concept
         question.type = "list";
 
-        if(question.detail.length === 0){
+        // if(question.detail.length == 0){
           // this.$root.questions[pos].word = field[counter-1];
-        }
+        // }
 //        console.log("||" + this.$root.questions[pos].word + "||");
         question.detail.push(temp);
         // TEST OUTPUT
@@ -176,9 +176,9 @@ export default {
               // Create a date note
               console.log("Calling parseDate()");
               this.parseDate( fields[counter], fields[counter].substring( findNum, findNum + 3 ) );
-            } else if ( fields[counter].search("?") != -1 ) {
             // } else if ( false ) {
               // Question note
+            } else if ( fields[counter].match('?') ) {
               console.log("question line");
               this.parseQuestion( fields[counter] );
             } else if (fields[counter].match(" - ")){
