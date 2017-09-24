@@ -75,7 +75,7 @@ export default {
 methods: {
      // Invoked when a list is parsed (signified by '-' and 'TAB')
      splitList: function(field, index){
-       console.log("splitList invoked");
+       console.log("splitList invoked. Container index: " + index);
        // Remove list signifier character(s)
        var temp = field.substring(1);
        temp.trim();
@@ -84,6 +84,12 @@ methods: {
        // TEST OUTPUT
        var test = this.$root.questions[index].detail.pop();
        console.log("splitList push: " + test);
+     },
+
+     parseConcept: function(field, noteIndex) {
+       // Invoked to parse out concept information
+       console.log("parseConcept invoked");
+
      },
 
      splitData: function() {
@@ -105,6 +111,7 @@ methods: {
          } else {
            // Note information is for a new key concept
            ++containerPos;
+
            console.log("Concept parse here");
          }
 

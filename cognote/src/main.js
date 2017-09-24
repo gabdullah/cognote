@@ -33,6 +33,13 @@ new Vue({
                   detail: [
                       "prepares protiens"
                   ]
+              },
+              {
+                  type: "definition",
+                  word: "tom",
+                  detail: [
+                      "I did't think of a joke"
+                  ]
               }
           ]
       }
