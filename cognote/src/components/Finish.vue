@@ -4,8 +4,8 @@
   <cognoteHeader></cognoteHeader>
     <link href="https://afeld.github.io/emoji-css/emoji.css" rel="stylesheet">
 
-    <p>Results: {{ $root.correct }} / {{ $root.questions.length }}</p>
-    <p v-for="(question, index) in $root.questions">
+    <p>Results: {{ $root.correct }} / {{ $root.questions[0].max }}</p>
+    <p v-for="(question, index) in $root.questions[0].max">
     Question {{index + 1}} : {{ question.status }}
     
     </p>
@@ -180,7 +180,7 @@ export default {
     
   calculated: {
       percentage: function () {
-          var perc = Math.floor((this.$root.correct / this.$root.questions.length) * 100);
+          var perc = Math.floor((this.$root.correct / this.$root.questions[0].max) * 100);
           console.log(perc);
           return perc;
       }
@@ -200,7 +200,7 @@ export default {
           vm.loaded = true;
       }, 2000);
       
-      this.perc = Math.floor((this.$root.correct / this.$root.questions.length) * 100);
+      this.perc = Math.floor((this.$root.correct / this.$root.questions[0].max) * 100);
       console.log(this.perc);
   },
     

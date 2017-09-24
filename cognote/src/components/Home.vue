@@ -77,7 +77,7 @@ methods: {
        if(this.$root.questions[pos].detail.length === 0){
         // this.$root.questions[pos].word = field[counter-1];
       }
-       console.log("||" + this.$root.questions[pos+1].word + "||");
+       console.log("||" + this.$root.questions[pos].word + "||");
        this.$root.questions[pos].detail.push(temp);
        // TEST OUTPUT
        //var test = this.$root.questions[pos].detail;
@@ -142,10 +142,12 @@ methods: {
               this.parseConcept(fields[counter], containerPos, "list", "" );
             }
             ++containerPos;
+            this.$root.questions[0].max = containerPos;
          }
         // Move counter
          counter++;
        }
+       this.$router.push('/quiz');
      }
    }
  }

@@ -5,6 +5,7 @@ module.exports = {
 		for(var i = 0; i < 400; i++) {
 			// console.log("HEY LISTEN");
 			var question = 	{
+				'max': '',
               'type': '',
               'word': '',
 			  'detail': [],

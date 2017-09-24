@@ -2,7 +2,7 @@
 <div id="header">
       <router-link to="/" class="routerLink">
     <h1>COGNOTE</h1>
-    <h3 id="subtitle">AN EASIER WAY TO STUDY</h3>
+    <h3 id="subtitle">A BETTER WAY TO STUDY</h3>
           </router-link>
   </div>
 </template>

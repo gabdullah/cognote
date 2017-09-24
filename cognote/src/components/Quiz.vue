@@ -4,7 +4,7 @@
 
 <p>Quiz Time!</p>
     <p>You're on question {{ questionIndex }} of 
-        {{ $root.questions.length }}</p>
+        {{ $root.questions[0].max }}</p>
   <div id="flashContainer">
     <div class="flashcard front" 
          v-bind:class="{ flipUp: showFront,
@@ -22,7 +22,7 @@
                        hidden: !loaded}">
         
     <p class="cardText">
-        {{$root.questions[questionIndex - 1].answer}}</p>
+        {{$root.questions[questionIndex - 1].detail[0]}}</p>
     </div>
   </div>
     <button @click="flipCard()">Flip</button>
@@ -223,7 +223,7 @@ export default {
               
           }
           
-          if (this.questionIndex < this.$root.questions.length) {
+          if (this.questionIndex < this.$root.questions[0].max) {
           
             this.questionIndex++;
             var vm = this;
