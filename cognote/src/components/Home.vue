@@ -76,15 +76,18 @@ methods: {
      // Invoked when a list is parsed (signified by '-' and 'TAB')
      splitList: function(field, index){
        console.log("splitList invoked");
-       // Append field information to previous concept
+       // Remove list signifier character(s)
        var temp = field.substring(1);
-       this.$root.questions[index].detail.push(temp.trim());
+       temp.trim();
+       // Append field information to previous concept
+       this.$root.questions[index].detail.push(temp);
+       // TEST OUTPUT
        var test = this.$root.questions[index].detail.pop();
-       console.log(test);
+       console.log("splitList push: " + test);
      },
 
      splitData: function() {
-       console.log("hello world");
+       console.log("splitData");
        var s = document.getElementById('notes').value;
        console.log(s);
        var fields = s.split('\n');  // Notes broken by line
@@ -94,7 +97,7 @@ methods: {
 
        // Step through source text statements
        while (counter < fields.length){
-         console.log(fields[counter]);
+         console.log("field text: " + fields[counter]);
          // Checks to see if field element is a list
          if(fields[counter][0] == '-' || fields[counter][0] == '\t'){
            // Add field element to previous concept
@@ -102,6 +105,7 @@ methods: {
          } else {
            // Note information is for a new key concept
            ++containerPos;
+           console.log("Concept parse here");
          }
 
         // this.root.questions[index]
