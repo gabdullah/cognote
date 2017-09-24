@@ -88,12 +88,16 @@ methods: {
        // Invoked to parse out concept information
        console.log("parseConcept invoked; splitter: " + splitter);
        this.$root.questions[pos].type = noteType;
+       // Create a header word type
        if ( splitter == "" ) {
-         console.log("NOT ARRAY");
+         console.log("Header calledY");
          this.$root.questions[pos].word = field
        } else {
+        // Parse definition into word and meaning
         var fieldHalves = field.split(splitter);
+        console.log( "fieldHalves break: " + fieldHalves );
         this.$root.questions[pos].word = fieldHalves[0];
+        // Check for existence of meaning
         if ( fieldHalves.length > 1 ) {
           this.$root.questions[pos].detail.push(fieldHalves[1]);
         }
@@ -109,6 +113,7 @@ methods: {
      },
 
      parseDate: function(field, pos, dateStart){
+       // Invoked when field contains a date, stores date as word and whole field as detail
        var date = field.substring(dateStart, dateStart + 4);
        this.$root.questions[pos].type = "Date";
        this.$root.questions[pos].word = date;
