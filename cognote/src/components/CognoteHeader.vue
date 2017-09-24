@@ -1,8 +1,8 @@
 <template>
 <div id="header">
       <router-link to="/" class="routerLink">
-    <h1>COGNOTE</h1>
-    <h3 id="subtitle">AN EASIER WAY TO STUDY</h3>
+    <h1>CogNote</h1>
+    <h3 id="subtitle">A BETTER WAY TO STUDY</h3>
           </router-link>
   </div>
 </template>
@@ -28,7 +28,13 @@ h1 {
   font-size: 50px;
   font-style: italic;
   margin: 0px;
+  padding-bottom: 30px;
+    transition-duration: 3s;
 }
+    
+    h1:hover {
+        letter-spacing: 20px;
+    }
 
 #subtitle {
   position: absolute;
@@ -36,6 +42,12 @@ h1 {
   font-style: italic;
   left: 10px;
   font-size: 12px;
+  padding-bottom: 25px;
+    transition-duration: 3s;
 }
+    #subtitle:hover {
+        letter-spacing: 20px;
+    }
+    
 
 </style>

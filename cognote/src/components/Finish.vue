@@ -3,18 +3,26 @@
 <div id="container" v-if="answers">
   <cognoteHeader></cognoteHeader>
     <link href="https://afeld.github.io/emoji-css/emoji.css" rel="stylesheet">
-
-    <p>Results: {{ $root.correct }} / {{ $root.questions.length }}</p>
-    <p v-for="(question, index) in $root.questions">
-    Question {{index + 1}} : {{ question.status }}
+    <div id="finishContainer">
+    <div id="results" style="height: 80%; margin-top: 5%;">
+        <p>Results: {{ $root.correct }} / {{ $root.questions.length }}</p>
+        <p v-for="index in $root.questions[0].max">
+            Question {{index}} : {{ $root.questions[index - 1].status }}
     
-    </p>
-    <vue-easy-pie-chart 
+        </p>
+        </div>
+    <div id="controls" style="height: 80%; margin-top: 5%;">
+      <vue-easy-pie-chart 
                         :bar-color="'#00FF00'"
                         :track-color="'#FF3333'"
                         :line-width="6"
                         :percent="perc"
                         ></vue-easy-pie-chart>
+    
+      <button @click="redoQuiz(true)">Redo incorrect questions</button>
+      <button @click="redoQuiz(false)">Redo entire quiz</button>
+    </div>
+        </div>
     
     
     </div>
@@ -57,6 +65,12 @@
   flex-flow: column;
   background: #ABEDD8;
 }
+    #finishContainer {
+        display: flex;
+        justify-content: space-around;
+        align-content: center;
+        
+    }
 #name {
   background-color: #F5FEFF;
   width:80vw;
@@ -180,7 +194,7 @@ export default {
     
   calculated: {
       percentage: function () {
-          var perc = Math.floor((this.$root.correct / this.$root.questions.length) * 100);
+          var perc = Math.floor((this.$root.correct / this.$root.questions[0].max) * 100);
           console.log(perc);
           return perc;
       }
@@ -200,13 +214,17 @@ export default {
           vm.loaded = true;
       }, 2000);
       
-      this.perc = Math.floor((this.$root.correct / this.$root.questions.length) * 100);
+      this.perc = Math.floor((this.$root.correct / this.$root.questions[0].max) * 100);
       console.log(this.perc);
   },
     
   methods: {
       flipCard: function() {
           this.showFront = !this.showFront;
+      },
+      redoQuiz: function(incorrectOnlyBool) {
+          this.$root.incorrectOnly = incorrectOnlyBool;
+          this.$router.push('/quiz');
       }
   }
 }

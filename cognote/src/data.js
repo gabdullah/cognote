@@ -2,9 +2,10 @@ module.exports = {
 	getQuestions() {
 		var returnVal = [];
 
-		for(var i = 0; i < 400; i++) {
-			// console.log("HEY LISTEN");
+		for(var i = 0; i < 40; i++) {
+			console.log("HEY LISTEN");
 			var question = 	{
+				'max': '',
               'type': '',
               'word': '',
 			  'detail': [],
