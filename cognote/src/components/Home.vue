@@ -187,7 +187,7 @@ export default {
               this.parseDate( fields[counter], fields[counter].substring( findNum, findNum + 3 ) );
             // } else if ( false ) {
               // Question note
-            } else if ( fields[counter].match('?') ) {
+            } else if ( fields[counter].match("\\?") ) {
               console.log("question line");
               this.parseQuestion( fields[counter] );
             } else if (fields[counter].match(" - ")){
