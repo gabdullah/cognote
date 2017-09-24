@@ -94,7 +94,9 @@ methods: {
        } else {
         var fieldHalves = field.split(splitter);
         this.$root.questions[pos].word = fieldHalves[0];
-        this.$root.questions[pos].detail.push(fieldHalves[1]);
+        if ( fieldHalves.length > 1 ) {
+          this.$root.questions[pos].detail.push(fieldHalves[1]);
+        }
        }
        console.log("parceConcept word: " + this.$root.questions[pos].word);
        if ( splitter != "" ) {
