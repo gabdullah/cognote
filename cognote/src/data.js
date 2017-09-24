@@ -7,7 +7,8 @@ module.exports = {
 			var question = 	{
               'type': '',
               'word': '',
-              'detail': []
+			  'detail': [],
+			  'status': 'none'
           	}
 
           	returnVal.push(question);
