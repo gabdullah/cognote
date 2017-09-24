@@ -3,6 +3,7 @@
 import Vue from 'vue'
 import App from './App'
 import router from './router'
+import { getQuestions } from './data.js'
 
 Vue.config.productionTip = false
 
@@ -11,27 +12,7 @@ new Vue({
   el: '#app',
   data () {
       return {
-          questions: [
-              {
-                  type: "definition",
-                  word: "Mitochondria",
-                  answer: "Powerhouse of the Cell",
-                  status: "none" // None, correct, incorrect
-              },
-              {
-                  type: "definition",
-                  word: "nucleus",
-                  answer: "contains some dna i think",
-                  status: "none" // None, correct, incorrect
-              },
-              {
-                  type: "definition",
-                  word: "golgi apparatus",
-                  answer: "prepares protiens",
-                  status: "none" // None, correct, incorrect
-              }
-          ],
-          correct: 0
+          questions: getQuestions()
       }
   },
   router,
