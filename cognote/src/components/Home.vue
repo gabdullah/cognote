@@ -64,79 +64,79 @@ export default {
   components: {
       cognoteHeader
   },
-methods: {
-     // Invoked when a list is parsed (signified by '-' and 'TAB')
-     parseList: function(field, pos){
-       console.log("parseList invoked. Container index: " + pos);
-       // Remove list signifier character(s)
-       var temp = field.substring(1);
-       temp.trim();
-       // Append field information to previous concept
-       this.$root.questions[pos].type = "list";
+  methods: {
+      // Invoked when a list is parsed (signified by '-' and 'TAB')
+      parseList: function(field, pos){
+        console.log("parseList invoked. Container index: " + pos);
+        // Remove list signifier character(s)
+        var temp = field.substring(1);
+        temp.trim();
+        // Append field information to previous concept
+        this.$root.questions[pos].type = "list";
 
-       if(this.$root.questions[pos].detail.length === 0){
-        // this.$root.questions[pos].word = field[counter-1];
-      }
-       console.log("||" + this.$root.questions[pos].word + "||");
-       this.$root.questions[pos].detail.push(temp);
-       // TEST OUTPUT
-       //var test = this.$root.questions[pos].detail;
-       //console.log(this.$root.questions[pos].detail.length);
-     },
-
-     parseConcept: function(field, pos, noteType, splitter) {
-       // Invoked to parse out concept information
-       console.log("parseConcept invoked; splitter: " + splitter);
-       this.$root.questions[pos].type = noteType;
-       // Create a header word type
-       if ( splitter == "" ) {
-         console.log("Header calledY");
-         this.$root.questions[pos].word = field
-       } else {
-        // Parse definition into word and meaning
-        var fieldHalves = field.split(splitter);
-        console.log( "fieldHalves break: " + fieldHalves );
-        this.$root.questions[pos].word = fieldHalves[0];
-        // Check for existence of meaning
-        if ( fieldHalves.length > 1 ) {
-          this.$root.questions[pos].detail.push(fieldHalves[1]);
+        if(this.$root.questions[pos].detail.length === 0){
+          // this.$root.questions[pos].word = field[counter-1];
         }
-       }
-       console.log("parceConcept word: " + this.$root.questions[pos].word);
-       if ( splitter != "" ) {
-         console.log( "parseConcept detail: " + this.$root.questions[pos].detail );
-       }
-       /*var temp1 = this.$root.questions[pos].type;
-       var temp2 = this.$root.questions[pos].word;
-       var temp3 = this.$root.questions[pos].detail.pop();
-       console.log(temp1 + '|' + temp2 + '|' + temp3);*/
-     },
+        console.log("||" + this.$root.questions[pos].word + "||");
+        this.$root.questions[pos].detail.push(temp);
+        // TEST OUTPUT
+        //var test = this.$root.questions[pos].detail;
+        //console.log(this.$root.questions[pos].detail.length);
+      },
 
-     parseDate: function(field, pos, dateStart){
-       // Invoked when field contains a date, stores date as word and whole field as detail
-       var date = field.substring(dateStart, dateStart + 4);
-       this.$root.questions[pos].type = "Date";
-       this.$root.questions[pos].word = date;
-       this.$root.questions[pos].detail.push(field);
-     },
+      parseConcept: function(field, pos, noteType, splitter) {
+        // Invoked to parse out concept information
+        console.log("parseConcept invoked; splitter: " + splitter);
+        this.$root.questions[pos].type = noteType;
+        // Create a header word type
+        if ( splitter == "" ) {
+          console.log("Header calledY");
+          this.$root.questions[pos].word = field
+        } else {
+          // Parse definition into word and meaning
+          var fieldHalves = field.split(splitter);
+          console.log( "fieldHalves break: " + fieldHalves );
+          this.$root.questions[pos].word = fieldHalves[0];
+          // Check for existence of meaning
+          if ( fieldHalves.length > 1 ) {
+            this.$root.questions[pos].detail.push(fieldHalves[1]);
+          }
+        }
+        console.log("parceConcept word: " + this.$root.questions[pos].word);
+        if ( splitter != "" ) {
+          console.log( "parseConcept detail: " + this.$root.questions[pos].detail );
+        }
+        /*var temp1 = this.$root.questions[pos].type;
+        var temp2 = this.$root.questions[pos].word;
+        var temp3 = this.$root.questions[pos].detail.pop();
+        console.log(temp1 + '|' + temp2 + '|' + temp3);*/
+      },
 
-     splitData: function() {
-       console.log("splitData");
-       // Read in text from main text input
-       var s = document.getElementById('notes').value;
-       console.log(s);
-       var fields = s.split('\n');  // Notes broken by line
-       var counter = 0;             // Index for fields
-       var holder;
-       var containerPos = 0;        // Position in question array
-       // Step through source text statements
-       while (counter < fields.length){
-         console.log("field text: " + fields[counter] + "; containerpos: " + containerPos);
-         // Checks to see if field element is a list
-         if(fields[counter][0] == '-' || fields[counter][0] == '\t'){
-           // Add field element to previous concept
-           this.parseList(fields[counter], containerPos-1);
-         } else {
+      parseDate: function(field, pos, dateStart){
+        // Invoked when field contains a date, stores date as word and whole field as detail
+        var date = field.substring(dateStart, dateStart + 4);
+        this.$root.questions[pos].type = "Date";
+        this.$root.questions[pos].word = date;
+        this.$root.questions[pos].detail.push(field);
+      },
+
+      splitData: function() {
+        console.log("splitData");
+        // Read in text from main text input
+        var s = document.getElementById('notes').value;
+        console.log(s);
+        var fields = s.split('\n');  // Notes broken by line
+        var counter = 0;             // Index for fields
+        var holder;
+        var containerPos = 0;        // Position in question array
+        // Step through source text statements
+        while (counter < fields.length){
+          console.log("field text: " + fields[counter] + "; containerpos: " + containerPos);
+          // Checks to see if field element is a list
+          if(fields[counter][0] == '-' || fields[counter][0] == '\t'){
+            // Add field element to previous concept
+            this.parseList(fields[counter], containerPos-1);
+          } else {
             // Note information is for a new key concept
             // ++containerPos;
 
@@ -146,7 +146,7 @@ methods: {
             //   this.parseDate(fields[counter], containerPos, fields[counter].search(/[0000 - 2017]/))
             // }
             // else if(fields[counter].match(" - ")){
-            if(fields[counter].match(" - ")){
+            if (fields[counter].match(" - ")){
               console.log("hypen");
               this.parseConcept(fields[counter], containerPos, "simple", '-');
               // ++containerPos;
@@ -167,12 +167,12 @@ methods: {
             }
             ++containerPos;
             this.$root.questions[0].max = containerPos;
-         }
-        // Move counter
-         counter++;
-       }
-       this.$router.push('/quiz');
-     }
-   }
- }
+          }
+          // Move counter
+          counter++;
+        }
+      this.$router.push('/quiz');
+    }
+  }
+}
 </script>
