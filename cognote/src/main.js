@@ -12,7 +12,7 @@ new Vue({
   el: '#app',
   data () {
       return {
-          questions: getQuestions(),
+          questions: [],
           correct: 0
       }
   },

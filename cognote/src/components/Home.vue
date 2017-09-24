@@ -67,45 +67,57 @@ export default {
   methods: {
       // Invoked when a list is parsed (signified by '-' and 'TAB')
       parseList: function(field, pos){
+        var question = this.$root.questions[pos];
+          
         console.log("parseList invoked. Container index: " + pos);
         // Remove list signifier character(s)
         var temp = field.substring(1);
         temp.trim();
         // Append field information to previous concept
-        this.$root.questions[pos].type = "list";
+        question.type = "list";
 
-        if(this.$root.questions[pos].detail.length === 0){
+        if(question.detail.length === 0){
           // this.$root.questions[pos].word = field[counter-1];
         }
-        console.log("||" + this.$root.questions[pos].word + "||");
-        this.$root.questions[pos].detail.push(temp);
+//        console.log("||" + this.$root.questions[pos].word + "||");
+        question.detail.push(temp);
         // TEST OUTPUT
         //var test = this.$root.questions[pos].detail;
         //console.log(this.$root.questions[pos].detail.length);
       },
 
       parseConcept: function(field, pos, noteType, splitter) {
+          
+        var question = 	{
+              'type': noteType,
+              'word': '',
+			  'detail': [],
+			  'status': 'none'
+          	}
+          
         // Invoked to parse out concept information
         console.log("parseConcept invoked; splitter: " + splitter);
-        this.$root.questions[pos].type = noteType;
         // Create a header word type
         if ( splitter == "" ) {
           console.log("Header calledY");
-          this.$root.questions[pos].word = field
+          question.word = field
         } else {
           // Parse definition into word and meaning
           var fieldHalves = field.split(splitter);
           console.log( "fieldHalves break: " + fieldHalves );
-          this.$root.questions[pos].word = fieldHalves[0];
+          question.word = fieldHalves[0];
           // Check for existence of meaning
           if ( fieldHalves.length > 1 ) {
-            this.$root.questions[pos].detail.push(fieldHalves[1]);
+            question.detail.push(fieldHalves[1]);
           }
         }
-        console.log("parceConcept word: " + this.$root.questions[pos].word);
-        if ( splitter != "" ) {
-          console.log( "parseConcept detail: " + this.$root.questions[pos].detail );
-        }
+          
+          
+          this.$root.questions.push(question);
+//        console.log("parceConcept word: " + this.$root.questions[pos].word);
+//        if ( splitter != "" ) {
+//          console.log( "parseConcept detail: " + this.$root.questions[pos].detail );
+//        }
         /*var temp1 = this.$root.questions[pos].type;
         var temp2 = this.$root.questions[pos].word;
         var temp3 = this.$root.questions[pos].detail.pop();
