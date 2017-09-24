@@ -74,7 +74,7 @@ export default {
 
 methods: {
      // Invoked when a list is parsed (signified by '-' and 'TAB')
-     parseList: function(field, counter, pos){
+     parseList: function(field, pos){
        console.log("parseList invoked. Container index: " + pos);
        // Remove list signifier character(s)
        var temp = field[counter].substring(1);
@@ -83,7 +83,7 @@ methods: {
        this.$root.questions[pos].type = "list";
        
        if(this.$root.questions[pos].detail.length === 0){
-        this.$root.questions[pos].word = field[counter-1];
+        // this.$root.questions[pos].word = field[counter-1];
       }
 
        console.log("||" + this.$root.questions[pos].word + "||");
@@ -93,12 +93,12 @@ methods: {
        //console.log(this.$root.questions[pos].detail.length);
      },
 
-     parseConcept: function(field, pos, type, splitter) {
+     parseConcept: function(field, pos, noteType, splitter) {
        // Invoked to parse out concept information
        console.log("parseConcept invoked");
-       this.$root.questions[pos].type = type;
+       this.$root.questions[pos].type = noteType;
        this.$root.questions[pos].word = field.split(splitter)[0];
-       this.$root.questions[pos].detail.push(field.split(splitter)[1]);
+      //  this.$root.questions[pos].detail.push(field.split(splitter)[1]);
        /*var temp1 = this.$root.questions[pos].type;
        var temp2 = this.$root.questions[pos].word;
        var temp3 = this.$root.questions[pos].detail.pop();
@@ -117,32 +117,34 @@ methods: {
 
        // Step through source text statements
        while (counter < fields.length){
-         console.log("field text: " + fields[counter]);
+         console.log("field text: " + fields[counter] + "; containerpos: " + containerPos);
          // Checks to see if field element is a list
          if(fields[counter][0] == '-' || fields[counter][0] == '\t'){
            // Add field element to previous concept
-           this.parseList(fields, counter, containerPos);
+           this.parseList(fields[counter], containerPos-1);
+         } else {
+            // Note information is for a new key concept
+            ++containerPos;
+ 
+            //console.log("Concept parse here");
          }
-         else if(fields[counter].match(" - ")){ 
+         if(fields[counter].match(" - ")){ 
+          console.log("hypen");
           this.parseConcept(fields[counter], containerPos, "simple", '-');
           ++containerPos;
          }
          else if(fields[counter].match(':')){
+          console.log("colon");
           this.parseConcept(fields[counter], containerPos, "simple", ':');
           ++containerPos;
          }
          else if(fields[counter].match("->")){
+          console.log("arrow");
           this.parseConcept(fields[counter], containerPos, "simple", "->");
           ++containerPos;
          }
-          else {
-           // Note information is for a new key concept
-           ++containerPos;
 
-           //console.log("Concept parse here");
-         }
-
-        // this.root.questions[index]
+        // Move counter
          counter++;
        }
      }
