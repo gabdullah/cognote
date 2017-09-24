@@ -103,11 +103,13 @@ export default {
           question.word = field
         } else {
           // Parse definition into word and meaning
+          //field.trim();
           var fieldHalves = field.split(splitter);
           console.log( "fieldHalves break: " + fieldHalves );
           question.word = fieldHalves[0];
           // Check for existence of meaning
-          if ( fieldHalves.length > 1 ) {
+          if (fieldHalves[1] != '') {
+            console.log("Passed\n");
             question.detail.push(fieldHalves[1]);
           }
         }
