@@ -74,8 +74,8 @@ export default {
 
 methods: {
      // Invoked when a list is parsed (signified by '-' and 'TAB')
-     splitList: function(field, index){
-       console.log("splitList invoked. Container index: " + index);
+     parseList: function(field, index){
+       console.log("parseList invoked. Container index: " + index);
        // Remove list signifier character(s)
        var temp = field.substring(1);
        temp.trim();
@@ -83,7 +83,7 @@ methods: {
        this.$root.questions[index].detail.push(temp);
        // TEST OUTPUT
        var test = this.$root.questions[index].detail.pop();
-       console.log("splitList push: " + test);
+       console.log("parseList push: " + test);
      },
 
      parseConcept: function(field, noteIndex) {
@@ -94,6 +94,7 @@ methods: {
 
      splitData: function() {
        console.log("splitData");
+       // Read in text from main text input
        var s = document.getElementById('notes').value;
        console.log(s);
        var fields = s.split('\n');  // Notes broken by line
@@ -107,7 +108,7 @@ methods: {
          // Checks to see if field element is a list
          if(fields[counter][0] == '-' || fields[counter][0] == '\t'){
            // Add field element to previous concept
-           this.splitList(fields[counter], containerPos);
+           this.parseList(fields[counter], containerPos);
          } else {
            // Note information is for a new key concept
            ++containerPos;

@@ -11,8 +11,9 @@ Vue.config.productionTip = false
 new Vue({
   el: '#app',
   data () {
+      var index = 4;
       return {
-          questions: getQuestions()
+          questions: getQuestions(index)
       }
   },
   router,

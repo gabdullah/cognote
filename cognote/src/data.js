@@ -1,8 +1,8 @@
 module.exports = {
-	getQuestions() {
+	getQuestions(index) {
 		var returnVal = [];
 
-		for(var i = 0; i < 4; i++) {
+		for(var i = 0; i < index; i++) {
 			var question = 	{
               'type': '',
               'word': '',
