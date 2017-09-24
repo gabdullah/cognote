@@ -14,6 +14,9 @@
     <p class="cardText">
         {{ $root.questions[questionIndex - 1].word }}
         </p>
+    <p class="cardText" v-if="$root.questions[questionIndex - 1].detail.length > 1">
+        (There are {{ $root.questions[questionIndex - 1].detail.length }} main points)
+        </p>
     </div>
     
     <div class="flashcard back" 
@@ -21,8 +24,8 @@
                          flipDown: showFront,
                        hidden: !loaded}">
         
-    <p class="cardText">
-        {{$root.questions[questionIndex - 1].detail[0]}}</p>
+    <p class="cardText" v-for="detail in $root.questions[questionIndex - 1].detail">
+       - {{detail}}</p>
     </div>
   </div>
     <button @click="flipCard()">Flip</button>
@@ -90,6 +93,7 @@
         color: white;
         position: absolute;
         display: flex;
+        flex-direction: column;
         align-items: center;
         text-align: center;
         justify-content: center;
