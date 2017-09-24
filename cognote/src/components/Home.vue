@@ -51,6 +51,7 @@ button {
 #notes {
   height: 20vh;
   width: 80vw;
+  font-size: 14px;
 }
 </style>
 
@@ -194,7 +195,7 @@ export default {
     },
       
     sampleNotes: function() {
-        this.notes = "concept1: immediate detail\nconcept2: immediate detail\n- subsequent detail 1\n- subsequent detail 2\nconcept3:\n- subsequent detail 1\n- subsequent detail 2\nconcept4\nconcept5 -> definition\nconcept6\n- subsequent detail 1\nThe war of 1812 is donk\nconcept7\n\tsubsequent detail 1\n\tsubsequent detail 2\nconcept8 - immediate detail\n- subsequent date 2002\n- subsequent detail 1";
+        this.notes = "Mitochondria: The Powerhouse of a cell\nCitoplasm: the gooey stuff on the inside, where everything floats around\n- Gooey\n- Stuff floats around\nNucleus:\n- Has DNA\n- Source info for protiens\nCells are cool\nPlant cells -> made of cellulose\nAnimal cells\n- Squishy\nThe war of 1812 is donk\nBack to cells\n\tVery cool\n\tExtremely cool\nMitochondria - Powerhouse\n- Invented in 2002\n- Powers the Cell";
     }
   }
 }
