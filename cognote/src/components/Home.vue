@@ -77,7 +77,7 @@ methods: {
      parseList: function(field, pos){
        console.log("parseList invoked. Container index: " + pos);
        // Remove list signifier character(s)
-       var temp = field[counter].substring(1);
+       var temp = field.substring(1);
        temp.trim();
        // Append field information to previous concept
        this.$root.questions[pos].type = "list";
@@ -86,7 +86,7 @@ methods: {
         // this.$root.questions[pos].word = field[counter-1];
       }
 
-       console.log("||" + this.$root.questions[pos].word + "||");
+       console.log("||" + this.$root.questions[pos+1].word + "||");
        this.$root.questions[pos].detail.push(temp);
        // TEST OUTPUT
        //var test = this.$root.questions[pos].detail;
@@ -97,8 +97,14 @@ methods: {
        // Invoked to parse out concept information
        console.log("parseConcept invoked");
        this.$root.questions[pos].type = noteType;
+       if ( splitter == "" ) {
+         console.log("NOT ARRAY");
+         this.$root.questions[pos].word = field
+       } else {
        this.$root.questions[pos].word = field.split(splitter)[0];
-      //  this.$root.questions[pos].detail.push(field.split(splitter)[1]);
+       this.$root.questions[pos].detail.push(field.split(splitter)[1]);
+       }
+       console.log(this.$root.questions[pos].word);
        /*var temp1 = this.$root.questions[pos].type;
        var temp2 = this.$root.questions[pos].word;
        var temp3 = this.$root.questions[pos].detail.pop();
@@ -124,26 +130,31 @@ methods: {
            this.parseList(fields[counter], containerPos-1);
          } else {
             // Note information is for a new key concept
-            ++containerPos;
+            // ++containerPos;
  
             //console.log("Concept parse here");
+         
+            if(fields[counter].match(" - ")){ 
+              console.log("hypen");
+              this.parseConcept(fields[counter], containerPos, "simple", '-');
+              // ++containerPos;
+            }
+            else if(fields[counter].match(':')){
+              console.log("colon");
+              this.parseConcept(fields[counter], containerPos, "simple", ':');
+              // ++containerPos;
+            }
+            else if(fields[counter].match("->")){
+              console.log("arrow");
+              this.parseConcept(fields[counter], containerPos, "simple", "->");
+              // ++containerPos;
+            }
+            else {
+              console.log("heading");
+              this.parseConcept(fields[counter], containerPos, "list", "" );
+            }
+            ++containerPos;
          }
-         if(fields[counter].match(" - ")){ 
-          console.log("hypen");
-          this.parseConcept(fields[counter], containerPos, "simple", '-');
-          ++containerPos;
-         }
-         else if(fields[counter].match(':')){
-          console.log("colon");
-          this.parseConcept(fields[counter], containerPos, "simple", ':');
-          ++containerPos;
-         }
-         else if(fields[counter].match("->")){
-          console.log("arrow");
-          this.parseConcept(fields[counter], containerPos, "simple", "->");
-          ++containerPos;
-         }
-
         // Move counter
          counter++;
        }
