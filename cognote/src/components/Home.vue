@@ -74,15 +74,19 @@ export default {
 
 methods: {
      // Invoked when a list is parsed (signified by '-' and 'TAB')
-     parseList: function(field, pos){
+     parseList: function(field, counter, pos){
        console.log("parseList invoked. Container index: " + pos);
        // Remove list signifier character(s)
-       var temp = field.substring(1);
+       var temp = field[counter].substring(1);
        temp.trim();
        // Append field information to previous concept
        this.$root.questions[pos].type = "list";
-       this.$root.questions[pos].word = this.$root.questions[pos - 1];
-       console.log(this.$root.questions[pos].detail.length + "LENGTH");
+       
+       if(this.$root.questions[pos].detail.length === 0){
+        this.$root.questions[pos].word = field[counter-1];
+      }
+
+       console.log("||" + this.$root.questions[pos].word + "||");
        this.$root.questions[pos].detail.push(temp);
        // TEST OUTPUT
        //var test = this.$root.questions[pos].detail;
