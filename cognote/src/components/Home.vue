@@ -82,8 +82,8 @@ methods: {
        // Append field information to previous concept
        this.$root.questions[pos].detail.push(temp);
        // TEST OUTPUT
-       var test = this.$root.questions[pos].detail;
-       console.log("parseList push: " + test);
+       //var test = this.$root.questions[pos].detail;
+       //console.log("parseList push: " + test);
      },
 
      parseConcept: function(field, pos, type, splitter) {
@@ -92,10 +92,10 @@ methods: {
        this.$root.questions[pos].type = type;
        this.$root.questions[pos].word = field.split(splitter)[0];
        this.$root.questions[pos].detail.push(field.split(splitter)[1]);
-       var temp1 = this.$root.questions[pos].type;
+       /*var temp1 = this.$root.questions[pos].type;
        var temp2 = this.$root.questions[pos].word;
        var temp3 = this.$root.questions[pos].detail.pop();
-       console.log(temp1 + '|' + temp2 + '|' + temp3);
+       console.log(temp1 + '|' + temp2 + '|' + temp3);*/
      },
 
      splitData: function() {
