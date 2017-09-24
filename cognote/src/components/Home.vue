@@ -178,13 +178,16 @@ export default {
             this.parseList(fields[counter], containerPos-1);
           } else {
             // Concept notes
-            var findNum = fields[counter].search(/[0 - 9]/);
-            // var findNum = fields[counter].search(/[1000 - 2050]/);
-            if (findNum != -1 && !isNaN(parseInt(fields[counter][findNum + 3] ) ) ) {
-            // if ( findNum != -1 ) {
+            // var year = fields[counter].replace( /^\D+/g, '');
+            // year = year.replace( /g+/^\D, '');
+            console.log( "year: " + year );
+            // var year = fields[counter].search(/[1000 - 2050]/);
+            // if (year != -1 && !isNaN(parseInt(fields[counter][year + 3] ) ) ) {
+            if ( false ) {
+            // if ( year != -1 ) {
               // Create a date note
               console.log("Calling parseDate()");
-              this.parseDate( fields[counter], fields[counter].substring( findNum, findNum + 3 ) );
+              // this.parseDate( fields[counter], fields[counter].substring( year, year + 3 ) );
             // } else if ( false ) {
               // Question note
             } else if ( fields[counter].match("\\?") ) {
