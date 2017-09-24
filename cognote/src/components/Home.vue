@@ -6,10 +6,12 @@
 
 <!--<input id="name" type="text" placeholder="Enter your name"><br><br>-->
 
-  <textarea id="notes" type="text" >
+  <textarea id="notes" type="text" v-model="notes">
 
   </textarea><br>
     <button @click="splitData()">Submit</button>
+    <br><br>
+    <button @click="sampleNotes()">Click here to populate w sample notes</button>
 
 
 
@@ -49,6 +51,7 @@ button {
 #notes {
   height: 20vh;
   width: 80vw;
+  font-size: 14px;
 }
 </style>
 
@@ -58,7 +61,7 @@ export default {
   name: 'hello',
   data () {
     return {
-      msg: 'Welcome to Your Vue.js App'
+      notes: ''
     }
   },
   components: {
@@ -103,11 +106,14 @@ export default {
           question.word = field;
         } else {
           // Parse definition into word and meaning
+          //field.trim();
           var fieldHalves = field.split(splitter);
           console.log( "fieldHalves break: " + fieldHalves );
           question.word = fieldHalves[0];
           // Check for existence of meaning
-          if ( fieldHalves[1] != "" ) {
+
+          if (fieldHalves[1] != '') {
+            console.log("Passed\n");
             question.detail.push(fieldHalves[1]);
           }
         }
@@ -152,10 +158,13 @@ export default {
       },
 
       splitData: function() {
+        this.$root.questions = [];
+          
         console.log("splitData");
         this.$root.questions = [];
         // Read in text from main text input
-        var s = document.getElementById('notes').value;
+        
+        var s = this.notes;
         console.log(s);
         var fields = s.split('\n');  // Notes broken by line
         var counter = 0;             // Index for fields
@@ -201,6 +210,10 @@ export default {
           counter++;
         }
       this.$router.push('/quiz');
+    },
+      
+    sampleNotes: function() {
+        this.notes = "Mitochondria: The Powerhouse of a cell\nCitoplasm: the gooey stuff on the inside, where everything floats around\n- Gooey\n- Stuff floats around\nNucleus:\n- Has DNA\n- Source info for protiens\nCells are cool\nPlant cells -> made of cellulose\nAnimal cells\n- Squishy\nThe war of 1812 is donk\nBack to cells\n\tVery cool\n\tExtremely cool\nMitochondria - Powerhouse\n- Invented in 2002\n- Powers the Cell";
     }
   }
 }

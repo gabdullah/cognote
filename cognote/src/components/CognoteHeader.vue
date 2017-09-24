@@ -29,7 +29,12 @@ h1 {
   font-style: italic;
   margin: 0px;
   padding-bottom: 30px;
+    transition-duration: 3s;
 }
+    
+    h1:hover {
+        letter-spacing: 20px;
+    }
 
 #subtitle {
   position: absolute;
@@ -38,6 +43,11 @@ h1 {
   left: 10px;
   font-size: 12px;
   padding-bottom: 25px;
+    transition-duration: 3s;
 }
+    #subtitle:hover {
+        letter-spacing: 20px;
+    }
+    
 
 </style>

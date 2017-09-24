@@ -13,7 +13,8 @@ new Vue({
   data () {
       return {
           questions: [],
-          correct: 0
+          correct: 0,
+          incorrectOnly: false
       }
   },
   router,

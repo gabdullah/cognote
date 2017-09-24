@@ -4,15 +4,19 @@
 
 <p>Quiz Time!</p>
     <p>You're on question {{ questionIndex }} of 
-        {{ $root.questions[0].max }}</p>
+        {{ $root.questions.length }}</p>
   <div id="flashContainer">
     <div class="flashcard front" 
          v-bind:class="{ flipUp: showFront,
                          flipDown: !showFront
                        }">
-        
+        <p class="upperLeftIcon" v-if="$root.questions[questionIndex - 1].status == 'Correct'" >Status: ✅</p>
+        <p class="upperLeftIcon" v-if="$root.questions[questionIndex - 1].status == 'Incorrect'" >Status: ❌</p>
     <p class="cardText">
         {{ $root.questions[questionIndex - 1].word }}
+        </p>
+    <p class="cardText" v-if="$root.questions[questionIndex - 1].detail.length > 1">
+        (There are {{ $root.questions[questionIndex - 1].detail.length }} main points)
         </p>
     </div>
     
@@ -21,15 +25,15 @@
                          flipDown: showFront,
                        hidden: !loaded}">
         
-    <p class="cardText">
-        {{$root.questions[questionIndex - 1].detail[0]}}</p>
+    <p class="cardText" v-for="detail in $root.questions[questionIndex - 1].detail">
+       - {{detail}}</p>
     </div>
   </div>
     <button @click="flipCard()">Flip</button>
     
     <div id="finish" v-if="flipped">
-        <button @click="next(false)">I got it right! :)</button>
-        <button @click="next(true)">I got it wrong :(</button>
+        <button @click="next(false)">I got it right! 😀</button>
+        <button @click="next(true)">I got it wrong 😖</button>
     </div>
   
     
@@ -65,7 +69,7 @@
   position: absolute;
   left: 0px;
   top: 0px;
-  height: 100%;
+  height: 130%;
   width: 100%;
   text-align: center;
   justify-content: center;
@@ -84,12 +88,19 @@
   width: 80vw;
 }
     
+    .upperLeftIcon {
+        position: absolute;
+        top: 10px;
+        left: 20px;
+    }
+    
     .flashcard {
         width: 60vw;
         height: 30vw;
         color: white;
         position: absolute;
         display: flex;
+        flex-direction: column;
         align-items: center;
         text-align: center;
         justify-content: center;
@@ -126,7 +137,7 @@
     }
     
     .cardText {
-        padding: 20px;
+        
     }
     
     @keyframes flipUp {
@@ -195,6 +206,16 @@ export default {
   },
     
   mounted: function() {
+      this.questionIndex = 1;
+      
+      // Shows only questions marked 'incorrect'
+      if (this.$root.incorrectOnly) {
+          while (this.$root.questions[this.questionIndex - 1].status == 'Correct') {
+              this.questionIndex++;
+          }
+      }
+      
+      // ui stuff 
       var vm = this;
       setTimeout(function(){ 
           vm.loaded = true;
@@ -211,19 +232,30 @@ export default {
           this.loaded = false;
           this.showFront = true;
           
+          console.log(this.$root.questions[this.questionIndex - 1].status);
+          
           var questionPoint = this.$root.questions[this.questionIndex - 1]
           
           if (failed) {
               questionPoint.status = 'Incorrect';
           } else {
-              if (questionPoint.status == 'incorrect' || questionPoint.status == 'none') {
+              if (questionPoint.status == 'Incorrect' || questionPoint.status == 'none') {
                   this.$root.correct++;
               }
               questionPoint.status = 'Correct';
               
           }
+          // Shows only questions marked 'incorrect'
+          if (this.$root.incorrectOnly) {
+              while (this.$root.questions[this.questionIndex - 1].status == 'Correct') {
+              this.questionIndex++;
+              if (this.questionIndex >= this.$root.questions.length) {
+                  this.$router.push('/finish');
+              }
+            }
+          }
           
-          if (this.questionIndex < this.$root.questions[0].max) {
+          if (this.questionIndex < this.$root.questions.length) {
           
             this.questionIndex++;
             var vm = this;
