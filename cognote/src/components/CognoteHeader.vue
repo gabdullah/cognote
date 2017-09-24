@@ -1,11 +1,17 @@
 <template>
 <div id="header">
+      <router-link to="/" class="routerLink">
     <h1>COGNOTE</h1>
     <h3 id="subtitle">AN EASIER WAY TO STUDY</h3>
+          </router-link>
   </div>
 </template>
 
 <style>
+    .routerLink {
+        color: white;
+        text-decoration: none;
+    }
 #header {
   width: 100%;
   margin-top: 0px;

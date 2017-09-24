@@ -27,9 +27,6 @@ button {
 </style>
 
 <style scoped>
-
-
-
 #container {
   font-family: sans-serif;
   position: absolute;
@@ -56,22 +53,17 @@ button {
 </style>
 
 <script>
-
 import cognoteHeader from './CognoteHeader.vue'
-
 export default {
   name: 'hello',
   data () {
     return {
       msg: 'Welcome to Your Vue.js App'
     }
-
   },
-
   components: {
       cognoteHeader
   },
-
 methods: {
      // Invoked when a list is parsed (signified by '-' and 'TAB')
      parseList: function(field, pos){
@@ -85,14 +77,12 @@ methods: {
        if(this.$root.questions[pos].detail.length === 0){
         // this.$root.questions[pos].word = field[counter-1];
       }
-
        console.log("||" + this.$root.questions[pos+1].word + "||");
        this.$root.questions[pos].detail.push(temp);
        // TEST OUTPUT
        //var test = this.$root.questions[pos].detail;
        //console.log(this.$root.questions[pos].detail.length);
      },
-
      parseConcept: function(field, pos, noteType, splitter) {
        // Invoked to parse out concept information
        console.log("parseConcept invoked");
@@ -110,7 +100,6 @@ methods: {
        var temp3 = this.$root.questions[pos].detail.pop();
        console.log(temp1 + '|' + temp2 + '|' + temp3);*/
      },
-
      splitData: function() {
        console.log("splitData");
        // Read in text from main text input
@@ -120,7 +109,6 @@ methods: {
        var counter = 0;             // Index for fields
        var holder;
        var containerPos = 0;        // Position in question array
-
        // Step through source text statements
        while (counter < fields.length){
          console.log("field text: " + fields[counter] + "; containerpos: " + containerPos);

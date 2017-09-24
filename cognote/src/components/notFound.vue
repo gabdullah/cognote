@@ -1,32 +1,17 @@
 <template>
-    <main>
-<div id="container" v-if="answers">
+<div id="container">
   <cognoteHeader></cognoteHeader>
     <link href="https://afeld.github.io/emoji-css/emoji.css" rel="stylesheet">
 
-    <p>Results: {{ $root.correct }} / {{ $root.questions.length }}</p>
-    <p v-for="(question, index) in $root.questions">
-    Question {{index + 1}} : {{ question.status }}
+
+
+<p>404: Page Not Found <i class="em em-astonished"></i></p>
+  
+  
     
-    </p>
-    <vue-easy-pie-chart 
-                        :bar-color="'#00FF00'"
-                        :track-color="'#FF3333'"
-                        :line-width="6"
-                        :percent="perc"
-                        ></vue-easy-pie-chart>
     
     
     </div>
-<div id="container" v-if="!answers">
-    <cognoteHeader></cognoteHeader>
-    <p>No data found :(</p>
-    <router-link to="/" class="routerLink">
-    
-    <p style="color:black;">Click here to go home!</p>
-          </router-link>
-    </div>
-        </main>
 </template>
 
 <style scoped>
@@ -55,7 +40,7 @@
   text-align: center;
   justify-content: center;
   flex-flow: column;
-  background: #ABEDD8;
+  background: #46CDCF;
 }
 #name {
   background-color: #F5FEFF;
@@ -160,8 +145,6 @@ h1 {
 
 
 <script>
-import VueEasyPieChart from 'vue-easy-pie-chart'
-import 'vue-easy-pie-chart/dist/vue-easy-pie-chart.css'
 import cognoteHeader from './CognoteHeader.vue'
 
     
@@ -172,36 +155,19 @@ export default {
       questions: {},
       showFront: true,
       showBack: false,
-      loaded: false,
-      answers: true,
-        perc: 0
+      loaded: false
     }
   },
     
-  calculated: {
-      percentage: function () {
-          var perc = Math.floor((this.$root.correct / this.$root.questions.length) * 100);
-          console.log(perc);
-          return perc;
-      }
-  },
-    
   components:{
-      cognoteHeader,
-      VueEasyPieChart
+      cognoteHeader
   },
     
   mounted: function() {
-      if (this.$root.questions[0].status == 'none') {
-          this.answers = false;
-      }
       var vm = this;
       setTimeout(function(){ 
           vm.loaded = true;
       }, 2000);
-      
-      this.perc = Math.floor((this.$root.correct / this.$root.questions.length) * 100);
-      console.log(this.perc);
   },
     
   methods: {

@@ -3,13 +3,17 @@
   <cognoteHeader></cognoteHeader>
 
 <p>Quiz Time!</p>
+    <p>You're on question {{ questionIndex }} of 
+        {{ $root.questions.length }}</p>
   <div id="flashContainer">
     <div class="flashcard front" 
          v-bind:class="{ flipUp: showFront,
                          flipDown: !showFront
                        }">
         
-    <p class="cardText">Front</p>
+    <p class="cardText">
+        {{ $root.questions[questionIndex - 1].word }}
+        </p>
     </div>
     
     <div class="flashcard back" 
@@ -17,10 +21,16 @@
                          flipDown: showFront,
                        hidden: !loaded}">
         
-    <p class="cardText">Back</p>
+    <p class="cardText">
+        {{$root.questions[questionIndex - 1].answer}}</p>
     </div>
   </div>
     <button @click="flipCard()">Flip</button>
+    
+    <div id="finish" v-if="flipped">
+        <button @click="next(false)">I got it right! :)</button>
+        <button @click="next(true)">I got it wrong :(</button>
+    </div>
   
     
     
@@ -42,6 +52,12 @@
     button:hover {
         background: #3D84A8;
         border: #4D7498 solid 3px;
+    }
+    
+    #finish {
+        display: flex;
+        align-self: center;
+        justify-content: center;
     }
     
 #container {
@@ -84,7 +100,8 @@
         z-index: 1000;
     }
     .back {
-        background: #4D7498
+        background: #ABEDD8;
+        color: #4D7498;
     }
     
     .hidden {
@@ -166,10 +183,10 @@ export default {
   name: 'quiz',
   data () {
     return {
-      questions: {},
+      questionIndex: 1,
       showFront: true,
-      showBack: false,
-      loaded: false
+      loaded: false,
+      flipped: false
     }
   },
     
@@ -181,12 +198,42 @@ export default {
       var vm = this;
       setTimeout(function(){ 
           vm.loaded = true;
-      }, 2000);
+      }, 600);
   },
     
   methods: {
       flipCard: function() {
           this.showFront = !this.showFront;
+          this.flipped = true;
+      },
+      next: function(failed) {
+          this.flipped = false;
+          this.loaded = false;
+          this.showFront = true;
+          
+          var questionPoint = this.$root.questions[this.questionIndex - 1]
+          
+          if (failed) {
+              questionPoint.status = 'Incorrect';
+          } else {
+              if (questionPoint.status == 'incorrect' || questionPoint.status == 'none') {
+                  this.$root.correct++;
+              }
+              questionPoint.status = 'Correct';
+              
+          }
+          
+          if (this.questionIndex < this.$root.questions.length) {
+          
+            this.questionIndex++;
+            var vm = this;
+            setTimeout(function(){ 
+                vm.loaded = true;
+            }, 600);
+          }
+          else {
+              this.$router.push('/finish');
+          }
       }
   }
 }
