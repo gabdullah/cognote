@@ -5,8 +5,8 @@
     <link href="https://afeld.github.io/emoji-css/emoji.css" rel="stylesheet">
 
     <p>Results: {{ $root.correct }} / {{ $root.questions[0].max }}</p>
-    <p v-for="(question, index) in $root.questions[0].max">
-    Question {{index + 1}} : {{ question.status }}
+    <p v-for="index in $root.questions[0].max">
+    Question {{index}} : {{ $root.questions[index - 1].status }}
     
     </p>
     <vue-easy-pie-chart 

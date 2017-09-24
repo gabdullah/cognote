@@ -12,7 +12,8 @@ new Vue({
   el: '#app',
   data () {
       return {
-          questions: getQuestions()
+          questions: getQuestions(),
+          correct: 0
       }
   },
   router,
