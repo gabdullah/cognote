@@ -132,7 +132,7 @@ methods: {
             //console.log("Concept parse here");
             if(fields[counter].search(/[0000 - 2017]/) != -1){
               console.log("Calling parseDate()");
-              this.parseDate(fields[counter], containerPos, fields[counter].search(/[0000 - 2017]))
+              this.parseDate(fields[counter], containerPos, fields[counter].search(/[0000 - 2017]/))
             }
             else if(fields[counter].match(" - ")){
               console.log("hypen");
