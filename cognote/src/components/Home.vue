@@ -77,12 +77,13 @@ methods: {
        if(this.$root.questions[pos].detail.length === 0){
         // this.$root.questions[pos].word = field[counter-1];
       }
-       console.log("||" + this.$root.questions[pos+1].word + "||");
+       console.log("||" + this.$root.questions[pos].word + "||");
        this.$root.questions[pos].detail.push(temp);
        // TEST OUTPUT
        //var test = this.$root.questions[pos].detail;
        //console.log(this.$root.questions[pos].detail.length);
      },
+
      parseConcept: function(field, pos, noteType, splitter) {
        // Invoked to parse out concept information
        console.log("parseConcept invoked");
@@ -139,7 +140,7 @@ methods: {
             }
             else {
               console.log("heading");
-              this.parseConcept(fields[counter], containerPos, "list", "" );
+              this.parseConcept(fields[counter], containerPos, "header", "" );
             }
             ++containerPos;
          }
