@@ -74,22 +74,28 @@ export default {
 
 methods: {
      // Invoked when a list is parsed (signified by '-' and 'TAB')
-     parseList: function(field, index){
-       console.log("parseList invoked. Container index: " + index);
+     parseList: function(field, pos){
+       console.log("parseList invoked. Container index: " + pos);
        // Remove list signifier character(s)
        var temp = field.substring(1);
        temp.trim();
        // Append field information to previous concept
-       this.$root.questions[index].detail.push(temp);
+       this.$root.questions[pos].detail.push(temp);
        // TEST OUTPUT
-       var test = this.$root.questions[index].detail.pop();
+       var test = this.$root.questions[pos].detail.pop();
        console.log("parseList push: " + test);
      },
 
-     parseConcept: function(field, noteIndex) {
+     parseConcept: function(field, pos, type, splitter) {
        // Invoked to parse out concept information
        console.log("parseConcept invoked");
-
+       this.$root.questions[pos].type = type;
+       this.$root.questions[pos].word = field.split(splitter)[0];
+       this.$root.questions[pos].detail.push(field.split(splitter)[1]);
+       var temp1 = this.$root.questions[pos].type;
+       var temp2 = this.$root.questions[pos].word;
+       var temp3 = this.$root.questions[pos].detail.pop();
+       console.log(temp1 + '|' + temp2 + '|' + temp3);
      },
 
      splitData: function() {
@@ -109,11 +115,21 @@ methods: {
          if(fields[counter][0] == '-' || fields[counter][0] == '\t'){
            // Add field element to previous concept
            this.parseList(fields[counter], containerPos);
-         } else {
+         }
+         else if(fields[counter].match(" - ")){ 
+          this.parseConcept(fields[counter], containerPos, "simple", '-');
+         }
+         else if(fields[counter].match(':')){
+          this.parseConcept(fields[counter], containerPos, "simple", ':');
+         }
+         else if(fields[counter].match("->")){
+          this.parseConcept(fields[counter], containerPos, "simple", "->");
+         }
+          else {
            // Note information is for a new key concept
            ++containerPos;
 
-           console.log("Concept parse here");
+           //console.log("Concept parse here");
          }
 
         // this.root.questions[index]
