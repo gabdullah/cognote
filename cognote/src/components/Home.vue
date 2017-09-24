@@ -130,11 +130,12 @@ methods: {
             // ++containerPos;
 
             //console.log("Concept parse here");
-            if(fields[counter].search(/[0000 - 2017]/) != -1){
-              console.log("Calling parseDate()");
-              this.parseDate(fields[counter], containerPos, fields[counter].search(/[0000 - 2017]/))
-            }
-            else if(fields[counter].match(" - ")){
+            // if(fields[counter].search(/[0000 - 2017]/) != -1){
+            //   console.log("Calling parseDate()");
+            //   this.parseDate(fields[counter], containerPos, fields[counter].search(/[0000 - 2017]/))
+            // }
+            // else if(fields[counter].match(" - ")){
+            if(fields[counter].match(" - ")){
               console.log("hypen");
               this.parseConcept(fields[counter], containerPos, "simple", '-');
               // ++containerPos;
