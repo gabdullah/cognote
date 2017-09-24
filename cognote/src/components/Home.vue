@@ -4,7 +4,7 @@
 
 <p>Type your notes below, and hit "Submit" to make a quiz!!</p>
 
-<input id="name" type="text" placeholder="Enter your name"><br><br>
+<!--<input id="name" type="text" placeholder="Enter your name"><br><br>-->
 
   <textarea id="notes" type="text" >
 

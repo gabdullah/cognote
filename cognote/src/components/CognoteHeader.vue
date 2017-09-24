@@ -1,7 +1,7 @@
 <template>
 <div id="header">
       <router-link to="/" class="routerLink">
-    <h1>COGNOTE</h1>
+    <h1>CogNote</h1>
     <h3 id="subtitle">A BETTER WAY TO STUDY</h3>
           </router-link>
   </div>
@@ -28,6 +28,7 @@ h1 {
   font-size: 50px;
   font-style: italic;
   margin: 0px;
+  padding-bottom: 30px;
 }
 
 #subtitle {
@@ -36,6 +37,7 @@ h1 {
   font-style: italic;
   left: 10px;
   font-size: 12px;
+  padding-bottom: 25px;
 }
 
 </style>
