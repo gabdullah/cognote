@@ -6,7 +6,7 @@
     <div id="finishContainer">
     <div id="results" style="height: 80%; margin-top: 5%;">
         <p>Results: {{ $root.correct }} / {{ $root.questions.length }}</p>
-        <p v-for="index in $root.questions[0].max">
+        <p v-for="index in $root.questions.length">
             Question {{index}} : {{ $root.questions[index - 1].status }}
     
         </p>
@@ -194,7 +194,7 @@ export default {
     
   calculated: {
       percentage: function () {
-          var perc = Math.floor((this.$root.correct / this.$root.questions[0].max) * 100);
+          var perc = Math.floor((this.$root.correct / this.$root.questions.length) * 100);
           console.log(perc);
           return perc;
       }
@@ -214,7 +214,7 @@ export default {
           vm.loaded = true;
       }, 2000);
       
-      this.perc = Math.floor((this.$root.correct / this.$root.questions[0].max) * 100);
+      this.perc = Math.floor((this.$root.correct / this.$root.questions.length) * 100);
       console.log(this.perc);
   },
     
